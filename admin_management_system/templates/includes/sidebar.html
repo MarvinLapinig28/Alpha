@@ -1,0 +1,62 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+            <a class="sidebar-brand brand-logo" href="{% url 'hod_home' %}"><img src="{% static 'assets/images/logo.png' %}" alt="logo" /></a>
+            <a class="sidebar-brand brand-logo-mini" href="{% url 'hod_home' %}"><img src="{% static 'assets/images/logo-mini.' %}" alt="logo" /></a>
+          </div>
+          <ul class="nav">
+            <li class="nav-item profile">
+              <div class="profile-desc">
+                <div class="profile-pic">
+                  <div class="count-indicator">
+                    <img class="img-xs rounded-circle " src="{% static 'assets/images/faces/face15.jpg' %}" alt="">
+                    <span class="count bg-success"></span>
+                  </div>
+                  <div class="profile-name">
+                    <h5 class="mb-0 font-weight-normal">{{user.first_name}} {{ user.last_name}}</h5>
+                    {% if user.user_type == '1' %}
+                    <span>Admin</span>
+                    {% elif user.user_type == '2' %}
+                     <span>Staff</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item nav-category">
+              <span class="nav-link">Navigation</span>
+            </li>
+            <li class="nav-item menu-items">
+              <a class="nav-link" href="{% url 'hod_home' %}">
+                <span class="menu-icon">
+                  <i class="mdi mdi-speedometer"></i>
+                </span>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item menu-items">
+              <a class="nav-link" href="{% url 'add_staff' %}">
+                <span class="menu-icon">
+                  <i class="mdi mdi-account-plus"></i>
+                </span>
+                <span class="menu-title">Add Faculty</span>
+              </a>
+            </li>
+            <li class="nav-item menu-items">
+             <a class="nav-link" href="{% url 'view_staff' %}">
+                <span class="menu-icon">
+                  <i class="mdi mdi-airplay"></i>
+                </span>
+                <span class="menu-title">View Faculty</span>
+              </a>
+            </li>
+            <li class="nav-item menu-items">
+             <a class="nav-link" href="{% url 'doLogout' %}">
+                <span class="menu-icon">
+                  <i class="mdi mdi-logout"></i>
+                </span>
+                <span class="menu-title">Signout</span>
+              </a>
+            </li>
+          </ul>
+      </nav>
