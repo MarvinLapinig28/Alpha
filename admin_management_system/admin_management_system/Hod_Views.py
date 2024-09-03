@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from app.models import  Staff
+from app.models import Staff
 from django.contrib import messages
-from app.models import  CustomUser
+from app.models import CustomUser
+from django.views.decorators.cache import cache_control
 
 
 
 @login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def HOME(request):
     staff = Staff.objects.all()
     staff_count = Staff.objects.all().count()
@@ -17,7 +19,8 @@ def HOME(request):
     }
     return render(request,'Hod/home.html',context)
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def ADD_STAFF(request):
     if request.method == "POST":
         first_name = request.POST.get('first_name')
@@ -55,7 +58,8 @@ def ADD_STAFF(request):
             return redirect('add_staff')
     return render(request,'Hod/add_staff.html')
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def VIEW_STAFF(request):
     staff = Staff.objects.all()
 
@@ -64,7 +68,8 @@ def VIEW_STAFF(request):
     }
     return render(request,'Hod/view_staff.html',context)
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def EDIT_STAFF(request,id):
     staff = Staff.objects.get(id = id)
 
@@ -73,7 +78,8 @@ def EDIT_STAFF(request,id):
     }
     return render(request,'Hod/edit_staff.html',context)
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def UPDATE_STAFF(request):
     if request.method == "POST":
         staff_id = request.POST.get('staff_id')
@@ -105,7 +111,8 @@ def UPDATE_STAFF(request):
         return redirect('view_staff')
     return render(request, 'Hod/edit_staff.html')
 
-
+@login_required(login_url='/')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def DELETE_STAFF(request,admin):
     staff = CustomUser.objects.get(id=admin)
     staff.delete()
